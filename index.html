@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#b3002d">
+<title>Hurricane Ready</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <h1>Hurricane Ready</h1>
+  <div id="countdown" class="countdown" aria-live="polite"></div>
+</header>
+
+<main>
+  <section id="tab-checklist" class="tab" role="tabpanel">
+    <div class="seg" role="tablist" aria-label="Phase">
+      <button data-phase="before" class="on">Before</button>
+      <button data-phase="during">During</button>
+      <button data-phase="after">After</button>
+    </div>
+    <div id="progress" class="progress"><div></div></div>
+    <p id="due" class="due" hidden></p>
+    <div id="checklist"></div>
+  </section>
+
+  <section id="tab-supplies" class="tab" role="tabpanel" hidden>
+    <p class="note">Go-Kit: 3+ days, portable. Stay-at-Home Kit: 2+ weeks. Quantities scale with household size (set in Plan).</p>
+    <div id="expiring" class="due" hidden></div>
+    <div id="supplies"></div>
+    <form id="add-supply" class="row">
+      <input name="name" placeholder="Add item" required>
+      <select name="kit"><option value="go">Go-Kit</option><option value="home">Stay-at-Home</option></select>
+      <input name="qty" type="number" min="1" value="1" aria-label="Quantity needed">
+      <button>Add</button>
+    </form>
+  </section>
+
+  <section id="tab-alerts" class="tab" role="tabpanel" hidden>
+    <div id="alert-status" class="note"></div>
+    <div id="alerts"></div>
+    <div class="row">
+      <button id="refresh">Refresh now</button>
+      <button id="notify">Enable notifications</button>
+    </div>
+    <p class="note">Alerts come from the US National Weather Service. They need internet; the last result is kept for offline viewing. Always confirm with local officials.</p>
+  </section>
+
+  <section id="tab-plan" class="tab" role="tabpanel" hidden>
+    <form id="plan" class="stack">
+      <label>Storm expected to arrive
+        <input type="datetime-local" name="landfall">
+      </label>
+      <label>People in household
+        <input type="number" name="people" min="1" max="20" value="1">
+      </label>
+      <label>Pets
+        <input type="number" name="pets" min="0" max="20" value="0">
+      </label>
+      <fieldset>
+        <legend>Location (for alerts)</legend>
+        <div class="row">
+          <input name="lat" inputmode="decimal" placeholder="Latitude">
+          <input name="lon" inputmode="decimal" placeholder="Longitude">
+        </div>
+        <button type="button" id="locate">Use my location</button>
+      </fieldset>
+      <label>Evacuation destination
+        <input name="evacTo" placeholder="Where will you go?">
+      </label>
+      <label>Evacuation route
+        <input name="evacRoute" placeholder="Primary route / backup route">
+      </label>
+      <label>Out-of-area contact
+        <input name="contact" placeholder="Name and phone">
+      </label>
+      <label>Medications and dosages (keep a card in your Go-Kit)
+        <textarea name="meds" rows="3"></textarea>
+      </label>
+      <label>People who may need your help / who can help you
+        <textarea name="support" rows="3"></textarea>
+      </label>
+      <label>Other notes
+        <textarea name="notes" rows="3"></textarea>
+      </label>
+    </form>
+    <div class="row">
+      <button id="print">Print / save one-page plan</button>
+      <button id="reset" class="danger">Reset checklist</button>
+    </div>
+    <div class="note">
+      <p>Disaster Distress Helpline: call or text <a href="tel:18009855990">1-800-985-5990</a>. Emergencies: <a href="tel:911">911</a>.</p>
+      <p>Based on the American Red Cross Hurricane Preparedness Checklist. Wording here is paraphrased; see the original and the Red Cross Emergency App at <a href="https://www.redcross.org/prepare" rel="noopener">redcross.org/prepare</a>. This app is a memory aid, not a substitute for instructions from local officials.</p>
+    </div>
+  </section>
+</main>
+
+<nav class="tabs" aria-label="Sections">
+  <button data-tab="checklist" class="on">Checklist</button>
+  <button data-tab="supplies">Supplies</button>
+  <button data-tab="alerts">Alerts <span id="badge" hidden></span></button>
+  <button data-tab="plan">Plan</button>
+</nav>
+
+<pre id="printout" hidden></pre>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "Hurricane Ready",
+  "short_name": "Hurricane Ready",
+  "description": "Offline hurricane preparedness checklist, supply tracker and alerts.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#b3002d",
+  "theme_color": "#b3002d",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
